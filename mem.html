@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: calc(100% - 20px);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .link {
+            display: block;
+            margin-top: 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+            
+            errorMessage.textContent = "";
+            
+            if (password.length < 6) {
+                errorMessage.textContent = "Пароль має містити мінімум 6 символів";
+                return;
+            }
+            
+            const storedEmail = localStorage.getItem("email");
+            const storedPassword = localStorage.getItem("password");
+            
+            if (email === storedEmail && password === storedPassword) {
+                window.location.href = "qwe.html";
+            } else {
+                errorMessage.textContent = "Невірна електронна пошта або пароль";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Вхід</h2>
+        <form onsubmit="handleLogin(event)">
+            <input type="email" id="email" placeholder="Електронна пошта" required>
+            <input type="password" id="password" placeholder="Пароль" required>
+            <div id="error-message" class="error-message"></div>
+            <button class="btn" type="submit">Увійти</button>
+        </form>
+    </div>
+</body>
+</html>

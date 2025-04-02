@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: calc(100% - 20px);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .login-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .login-link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function handleRegister(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            const emailError = document.getElementById("email-error");
+            const passwordError = document.getElementById("password-error");
+            const confirmPasswordError = document.getElementById("confirm-password-error");
+            
+            emailError.textContent = "";
+            passwordError.textContent = "";
+            confirmPasswordError.textContent = "";
+            
+            if (password.length < 6) {
+                passwordError.textContent = "Пароль має містити мінімум 6 символів";
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                confirmPasswordError.textContent = "Паролі не співпадають";
+                return;
+            }
+            
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+            window.location.reload();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Реєстрація</h2>
+        <form onsubmit="handleRegister(event)">
+            <input type="email" id="email" placeholder="Електронна пошта" required>
+            <div id="email-error" class="error-message"></div>
+            <input type="password" id="password" placeholder="Пароль" required>
+            <div id="password-error" class="error-message"></div>
+            <input type="password" id="confirm-password" placeholder="Повторіть пароль" required>
+            <div id="confirm-password-error" class="error-message"></div>
+            <button class="btn" type="submit">Зареєструватися</button>
+        </form>
+        <div class="login-link">
+            <a href="mem.html" target="_blank">Перейти до входу</a>
+        </div>
+    </div>
+</body>
+</html>
